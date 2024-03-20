@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:inbridge/constants/constants.dart';
 import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/providers/theme_notifier.dart';
 import 'package:inbridge/providers/user_provider.dart';
 import 'package:inbridge/services/shared_data.dart';
 import 'package:inbridge/services/util/ext.dart';
+import 'package:inbridge/services/util/language.dart';
 import 'package:inbridge/views/auth/login.dart';
 import 'package:provider/provider.dart';
 
@@ -58,8 +60,8 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
 
     Timer(const Duration(seconds: 2), () async {
       context.userprovider
-        .setDefaultLanguage(DataPrefrences.getDefaultLanguage());
-      if (!await context.read<UserProvider>().checkLogin()) {
+          .setDefaultLanguage(DataPrefrences.getDefaultLanguage());
+      if (!await context.userprovider.checkLogin()) {
         setState(() {
           Navigator.pushReplacement(
               context, PageTransition(const LoginScreen()));
@@ -80,7 +82,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: primaryColorLight,
+      backgroundColor: context.bgcolor,
       body: Stack(
         children: [
           Column(
@@ -95,10 +97,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
                 child: SizedBox(
                   width: context.w * .3,
                   // width: size,
-                  child: Image.asset(
-                    "assets/icons/logo title.png",
-                    fit: BoxFit.fitWidth,
-                  ),
+                  child: Center(child: Txt(appName)),
                 ),
               ),
             ],
@@ -123,7 +122,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
                   width: context.w * .7,
                   // width: size,
                   child: Image.asset(
-                    "assets/icons/logo1.png",
+                    logoFull,
                     fit: BoxFit.fitWidth,
                   ),
                 ),

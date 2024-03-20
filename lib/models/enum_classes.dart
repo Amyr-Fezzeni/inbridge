@@ -1,8 +1,6 @@
 enum Gender { male, female, other }
 enum UserStatus { active, banned, disabled, deleted }
 enum Role { creator, admin }
-enum Category {post}
-enum PostType {type}
 
 UserStatus getUserStatusFromString(String? value) =>
     {
@@ -14,11 +12,10 @@ UserStatus getUserStatusFromString(String? value) =>
     UserStatus.disabled;
 
 
-Gender? getUserGenderFromString(String? value) => {
+Gender getUserGenderFromString(String? value) => {
       'male': Gender.male,
-      'female': Gender.female,
-      'other': Gender.other
-    }[value];
+      'female': Gender.female
+    }[value]?? Gender.other;
 
 
 Role getUserRoleFromString(String? value) =>

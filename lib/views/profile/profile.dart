@@ -394,8 +394,6 @@ class _ProfileScreenOldState extends State<ProfileScreenOld> {
                           title: txt("Edit Profile"),
                           icon: Icons.person,
                           screen: const EditProfileScreen()),
-                     
-                    
                       settingCard(
                           title: txt('Settings'),
                           icon: Icons.settings,
@@ -415,7 +413,6 @@ class _ProfileScreenOldState extends State<ProfileScreenOld> {
                           screen: const DefaultScreen(
                             title: "Terms & conditions",
                           )),
-                   
                       Padding(
                         padding: const EdgeInsets.only(bottom: 100),
                         child: settingCard(
@@ -466,21 +463,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 180,
                 child: Stack(
                   children: [
-                    Container(
-                      height: 120,
-                      decoration: BoxDecoration(
-                          color: context.bgcolor,
-                          boxShadow: defaultShadow,
-                          image: context.currentUser.banner.isNotEmpty
-                              ? DecorationImage(
-                                  image:
-                                      NetworkImage(context.currentUser.banner),
-                                  fit: BoxFit.cover)
-                              : const DecorationImage(
-                                  image: AssetImage(profileBanner),
-                                  fit: BoxFit.cover),
-                          borderRadius: BorderRadius.circular(10)),
-                    ),
                     Positioned(
                       bottom: 0,
                       left: 0,
@@ -553,7 +535,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
               const Gap(20),
-     
             ],
           ),
         ),

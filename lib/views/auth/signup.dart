@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:inbridge/models/user.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/views/widgets/default_screen.dart';
 import 'package:inbridge/views/widgets/loader.dart';
@@ -13,7 +12,6 @@ import 'package:inbridge/services/util/language.dart';
 import 'package:inbridge/services/validators.dart';
 import 'package:inbridge/views/widgets/bottuns.dart';
 import 'package:inbridge/views/widgets/text_field.dart';
-
 import '../../../constants/constants.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -148,15 +146,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 10,
                       ),
                       socialMediaButton(
-                          function: () =>{},
-                              // context.read<UserProvider>().googleLogIn(context),
+                          function: () => {},
+                          // context.read<UserProvider>().googleLogIn(context),
                           text: txt("Login with Google"),
                           image: googleLogo),
-                      socialMediaButton(
-                          function: () => log(
-                              'context.read<UserProvider>().facebookLogIn(context)'),
-                          text: txt("Login with FaceBook"),
-                          image: facebookLogo),
                       const SizedBox(
                         height: 15,
                       ),
@@ -426,15 +419,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                 if (formkey.currentState != null &&
                                     formkey.currentState!.validate()) {
-                                  await context.read<UserProvider>().signup(
-                                      firstName: firstNameController.text,
-                                      lastName: lastNameController.text,
-                                      email: emailController.text,
-                                      password: passwordController.text,
-                                      role: widget.isFreelancer
-                                          ? UserRole.freelance
-                                          : UserRole.client,
-                                      photo: photo);
+                                  // await context.read<UserProvider>().signup(
+                                  //     firstName: firstNameController.text,
+                                  //     lastName: lastNameController.text,
+                                  //     email: emailController.text,
+                                  //     password: passwordController.text,
+                                  //     role: widget.isFreelancer
+                                  //         ? UserRole.freelance
+                                  //         : UserRole.client,
+                                  //     photo: photo);
                                 }
                               },
                             ),

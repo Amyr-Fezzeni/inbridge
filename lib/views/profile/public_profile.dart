@@ -56,13 +56,7 @@ class _PublicProfileState extends State<PublicProfile> {
                               decoration: BoxDecoration(
                                   color: context.bgcolor,
                                   boxShadow: defaultShadow,
-                                  image: user.banner.isNotEmpty
-                                      ? DecorationImage(
-                                          image: NetworkImage(user.banner),
-                                          fit: BoxFit.cover)
-                                      : const DecorationImage(
-                                          image: AssetImage(profileBanner),
-                                          fit: BoxFit.cover),
+                                
                                   borderRadius: BorderRadius.circular(10)),
                             ),
                             Positioned(

@@ -13,7 +13,7 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String? label;
   final FocusNode? focus;
-  final String? Function(String?) validator;
+  final String? Function(String?)? validator;
   final bool isPassword;
   final TextInputType? keybordType;
   final List<TextInputFormatter>? inputFormatters;
@@ -28,11 +28,12 @@ class CustomTextField extends StatefulWidget {
   final bool trailing;
   final Widget? icon;
   final Function()? onSubmit;
+  final Widget? leadingIcon;
   const CustomTextField(
       {super.key,
       required this.hint,
       required this.controller,
-      required this.validator,
+      this.validator,
       this.label,
       this.leading,
       this.isPassword = false,
@@ -48,6 +49,7 @@ class CustomTextField extends StatefulWidget {
       this.submitted = false,
       this.editable = true,
       this.icon,
+      this.leadingIcon,
       this.focus});
 
   @override
@@ -89,10 +91,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     var style = context.watch<ThemeNotifier>();
     isEdited = widget.submitted ? true : isEdited;
-    if (widget.validator(widget.controller.text) == null) {
-      isCorrect = true;
-    } else {
-      isCorrect = false;
+    if (widget.validator != null) {
+      if (widget.validator!(widget.controller.text) == null) {
+        isCorrect = true;
+      } else {
+        isCorrect = false;
+      }
     }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.marginH),
@@ -152,20 +156,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 //         ),
                 //       )
                 //     : null,
-                prefixIcon: (widget.leading != null
-                    ? Container(
-                        // color: Colors.amber,
-                        width: 30,
-                        height: 30,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 5),
-                        child: Image.asset(
-                          widget.leading ?? "",
-                          fit: BoxFit.contain,
-                          width: 10,
-                        ),
-                      )
-                    : null),
+                prefixIcon: widget.leadingIcon ??
+                    (widget.leading != null
+                        ? Container(
+                            // color: Colors.amber,
+                            width: 30,
+                            height: 30,
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            child: Image.asset(
+                              widget.leading ?? "",
+                              fit: BoxFit.contain,
+                              width: 10,
+                            ),
+                          )
+                        : null),
                 hintStyle: style.text18.copyWith(
                     color: style.invertedColor.withOpacity(0.4), fontSize: 14),
                 contentPadding: EdgeInsets.only(
@@ -232,7 +237,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
           ),
           Builder(builder: (context) {
-            var result = widget.validator(widget.controller.text);
+            var result = widget.validator == null
+                ? null
+                : widget.validator!(widget.controller.text);
             if (result == null || !isEdited) {
               isCorrect = true;
               return const SizedBox();

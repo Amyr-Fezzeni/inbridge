@@ -19,9 +19,9 @@ class NotificationProvider with ChangeNotifier{
     DataPrefrences.setNotification(value);
     getNotificationStatus();
     if (value) {
-      UserService.saveFcm(NavigationService.navigatorKey.currentContext!.currentUser);
+      UserService.saveFcm(NavigationService.navigatorKey.currentContext!.userId);
     } else {
-      UserService.removeFcm(NavigationService.navigatorKey.currentContext!.currentUser);
+      UserService.removeFcm(NavigationService.navigatorKey.currentContext!.userId);
     }
   }
 
@@ -38,8 +38,8 @@ class NotificationProvider with ChangeNotifier{
     });
   }
 
-    updateNotifications(List<NotificationSetting> lst) async {
-    UserService.setNotificationSetting(lst);
+    updateNotificationStatus(bool value) async {
+    UserService.setNotificationSetting(value);
   }
 
 

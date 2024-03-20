@@ -1,11 +1,19 @@
+import 'dart:convert';
+
 import 'package:crossplat_objectid/crossplat_objectid.dart';
+import 'package:crypto/crypto.dart';
 import 'language.dart';
 
 String generateId() {
   ObjectId id1 = ObjectId();
   return id1.toHexString();
 }
-
+int createUniqueId() {
+  return DateTime.now().millisecondsSinceEpoch.remainder(100000);
+}
+String generateMD5(String input) {
+  return md5.convert(utf8.encode(input)).toString();
+}
 
 String capitalize(String text) {
   return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";

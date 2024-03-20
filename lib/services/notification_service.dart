@@ -164,7 +164,7 @@ class NotificationService {
       {required String title, required String body, String? img}) async {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
-        id: generateId(),
+        id: createUniqueId(),
         channelKey: 'basic_channel',
         title: title,
         body: body,

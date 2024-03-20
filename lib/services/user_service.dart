@@ -118,7 +118,7 @@ class UserService {
     } else {
       return null;
     }
-  }           
+  }
 
   static Future<bool> changePassword(String userId, String pass) async {
     try {
@@ -171,14 +171,14 @@ class UserService {
     }
   }
 
-  static Future<bool> saveFcm(UserModel user) async {
+  static Future<bool> saveFcm(String userId) async {
     if (!NavigationService.navigatorKey.currentContext!
         .read<NotificationProvider>()
         .isNotificationActive) return false;
     try {
       String? token = await NotificationService.getToken();
       if (token == null) return false;
-      await userCollection.doc(user.id).update({'fcm': token});
+      await userCollection.doc(userId).update({'fcm': token});
       return true;
     } on Exception {
       return false;
@@ -195,9 +195,9 @@ class UserService {
     }
   }
 
-  static Future<bool> removeFcm(UserModel user) async {
+  static Future<bool> removeFcm(String userId) async {
     try {
-      await userCollection.doc(user.id).update({'fcm': null});
+      await userCollection.doc(userId).update({'fcm': null});
       return true;
     } on Exception {
       return false;
@@ -222,23 +222,9 @@ class UserService {
     }
   }
 
-  static Future<void> setNotificationSetting(
-      List<NotificationSetting>? lst) async {
+  static Future<void> setNotificationSetting(bool value) async {
     await userCollection
         .doc(NavigationService.navigatorKey.currentContext!.userId)
-        .update({
-      'notifications': (lst ?? allNotifications).map((e) => e.toMap()).toList()
-    });
+        .update({'notificationStatus': value});
   }
-
-  static Future<void> saveJob(String id, {bool save = true}) async =>
-      userCollection
-          .doc(NavigationService.navigatorKey.currentContext!.userId)
-          .update({
-        'savedJobs': NavigationService.navigatorKey.currentContext!.userprovider
-                .currentUser!.savedJobs
-                .contains(id)
-            ? FieldValue.arrayRemove([id])
-            : FieldValue.arrayUnion([id])
-      });
 }

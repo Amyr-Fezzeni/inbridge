@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:inbridge/models/enum_classes.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:inbridge/models/user.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/views/profile/profile.dart';
 import 'package:inbridge/views/widgets/bottuns.dart';
@@ -45,16 +45,16 @@ class NavPanel extends StatelessWidget {
                             children: [
                               Txt(context.currentUser.getFullName()),
                               Txt(
-                                  context.currentUser.role == UserRole.freelance
-                                      ? 'Freelancer'
-                                      : 'Client',
+                                  context.currentUser.role == Role.creator
+                                      ? 'Creator'
+                                      : 'Admin',
                                   style: context.text)
                             ]))
                   ]),
                   const SizedBox(height: 20),
                 ],
               ),
-              if (context.currentUser.role == UserRole.freelance)
+              if (context.currentUser.role == Role.creator)
                 Card(
                   color: context.primaryColor,
                   child: Padding(

@@ -1,19 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:inbridge/constants/constants.dart';
 import 'package:inbridge/providers/menu_provider.dart';
 import 'package:inbridge/providers/notification_provider.dart';
 import 'package:inbridge/views/splash%20screen/custom_splash_screen.dart';
 import 'package:provider/provider.dart';
 import '../constants/fixed_messages.dart';
-import '../models/notification/notification.dart';
 import '../models/user.dart';
 import '../services/util/language.dart';
 import '../services/util/logic_service.dart';
 import '../services/util/navigation_service.dart';
-import '../services/notification_service.dart';
 import '../services/shared_data.dart';
 import '../services/user_service.dart';
 import '../services/validators.dart';
@@ -41,7 +37,6 @@ class UserProvider with ChangeNotifier {
     userStream?.listen((event) {}).onData((data) async {
       currentUser = UserModel.fromMap(data.docChanges.first.doc.data()!);
       notifyListeners();
-    
     });
   }
 
@@ -52,7 +47,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> removeData() async {
-    await UserService.removeFcm(currentUser!);
+    await UserService.removeFcm(currentUser!.id);
     await UserService.connectStatus(true);
     NavigationService.navigatorKey.currentContext!
         .read<NotificationProvider>()
@@ -71,8 +66,6 @@ class UserProvider with ChangeNotifier {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const CustomSplashScreen()),
         (Route<dynamic> route) => false);
-    // Navigator.pushReplacement(NavigationService.navigatorKey.currentContext!,
-    //     MaterialPageRoute(builder: (_) => const Index()));
   }
 
   Future<void> login(context, String email, String password,
@@ -80,23 +73,22 @@ class UserProvider with ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    var u = await UserService.getUser(email, password);
+    var user = await UserService.getUser(email, generateMD5(password));
     isLoading = false;
     notifyListeners();
 
-    if (u != null) {
-      currentUser = u;
-      startUserListen(u.id);
+    if (user != null) {
+      currentUser = user;
+      startUserListen(user.id);
       NavigationService.navigatorKey.currentContext!
           .read<NotificationProvider>()
           .startNotificationsListen();
       if (saveLogin) {
         DataPrefrences.setLogin(email);
-        DataPrefrences.setPassword(password);
+        DataPrefrences.setPassword(generateMD5(password));
       }
-      await UserService.saveFcm(u);
+      await UserService.saveFcm(user.id);
 
-      log("connected");
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (_) => const StructureHomeScreen()),
           (Route<dynamic> route) => false);
@@ -106,20 +98,18 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<bool> checkLogin() async {
-
     if (DataPrefrences.getLogin().isEmpty) return false;
-    var u = await UserService.getUser(
+    var user = await UserService.getUser(
         DataPrefrences.getLogin(), DataPrefrences.getPassword());
 
-    if (u != null) {
-      currentUser = u;
-      startUserListen(u.id);
+    if (user != null) {
+      currentUser = user;
+      startUserListen(user.id);
       NavigationService.navigatorKey.currentContext!
           .read<NotificationProvider>()
           .startNotificationsListen();
-      UserService.saveFcm(u);
+      UserService.saveFcm(user.id);
       UserService.connectStatus(true);
-      log("connected");
       Navigator.of(NavigationService.navigatorKey.currentContext!)
           .pushAndRemoveUntil(PageTransition(const StructureHomeScreen()),
               (Route<dynamic> route) => false);
@@ -129,64 +119,42 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future<void> signup(
-      {required String firstName,
-      required String lastName,
-      required String email,
-      required String password,
-      required UserRole role,
-      String photo = ""}) async {
+  Future<void> signup(Map<String, dynamic> userData) async {
     isLoading = true;
     notifyListeners();
     isLoading = false;
     UserModel user = UserModel(
-        id: generateId(),
-        firstName: firstName,
-        lastName: lastName,
-        role: role,
-        email: email.toLowerCase().trim(),
-        phoneNumber: '',
-        photo: photo,
-        banner: '',
-        jobs: [],
-        dateCreated: DateTime.now(),
-        lastLoggedIn: DateTime.now(),
-        emailVerified: false,
-        status: UserStatus.active,
-        savedJobs: [],
-        notifications: allNotifications,
-        password: password);
-    var u = await UserService.addUser(user);
-    if (u == "true") {
-      var u = await UserService.getUser(user.email, user.password);
-      if (u != null) {
-        currentUser = u;
-        startUserListen(u.id);
-        NavigationService.navigatorKey.currentContext!
-            .read<NotificationProvider>()
-            .startNotificationsListen();
-        UserService.saveFcm(user);
-        DataPrefrences.setLogin(email);
-        DataPrefrences.setPassword(password);
-        UserService.connectStatus(true);
-        NotificationService.sendPushNotifications(
-            title: appName,
-            body: welcomeMessage,
-            token: currentUser!.id,
-            type: 'system',
-            userId: currentUser!.id,
-            role: "user");
-        Navigator.of(NavigationService.navigatorKey.currentContext!)
-            .pushAndRemoveUntil(
-                MaterialPageRoute(builder: (_) => const StructureHomeScreen()),
-                (Route<dynamic> route) => false);
-      }
+      id: generateId(),
+      firstName: userData['firstName'],
+      lastName: userData['lastName'],
+      cin: userData['cin'],
+      birthday: userData['birthday'],
+      gender: userData['gender'],
+      email: userData['email'].toLowerCase().trim(),
+      phoneNumber: userData['phoneNumber'],
+      photo: userData['photo'],
+      password: userData['password'],
+      dateCreated: DateTime.now(),
+    );
+    var result = await UserService.addUser(user);
+    if (result == "true") {
+      startUserListen(user.id);
+      UserService.saveFcm(user.id);
+      DataPrefrences.setLogin(user.email);
+      DataPrefrences.setPassword(user.password);
+      NavigationService.navigatorKey.currentContext!
+          .read<NotificationProvider>()
+          .startNotificationsListen();
+
+      Navigator.of(NavigationService.navigatorKey.currentContext!)
+          .pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => const StructureHomeScreen()),
+              (Route<dynamic> route) => false);
     } else {
       popup(NavigationService.navigatorKey.currentContext!, 'ok',
-          cancel: false, description: txt(signupError));
+          cancel: false, description: result);
     }
   }
-
 
   Future<void> changePassword(BuildContext context, String oldPassword,
       String newPassword, String newPasswordConfirmed) async {
@@ -262,6 +230,4 @@ class UserProvider with ChangeNotifier {
 
     // updateUser();
   }
-
-
 }

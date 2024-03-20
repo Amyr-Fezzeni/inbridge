@@ -80,15 +80,23 @@ Widget svgImage(String url,
         Function()? function}) =>
     InkWell(
       onTap: function,
-      child: SvgPicture.asset(
-        url,
+      child: SizedBox(
         height: size,
         width: size,
-        // ignore: deprecated_member_use
-        color: color ??
-            (selected
-                ? NavigationService.navigatorKey.currentContext!.primaryColor
-                : NavigationService.navigatorKey.currentContext!.invertedColor
-                    .withOpacity(.7)),
+        child: Center(
+          child: SvgPicture.asset(
+            url,
+            height: size,
+            width: size,
+            // ignore: deprecated_member_use
+            color: color ??
+                (selected
+                    ? NavigationService
+                        .navigatorKey.currentContext!.primaryColor
+                    : NavigationService
+                        .navigatorKey.currentContext!.invertedColor
+                        .withOpacity(.7)),
+          ),
+        ),
       ),
     );

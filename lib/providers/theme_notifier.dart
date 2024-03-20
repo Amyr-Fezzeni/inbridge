@@ -54,7 +54,8 @@ class ThemeNotifier with ChangeNotifier {
   }
 
   initTheme() {
-    appTheme = getAppThemeFromString(DataPrefrences.getDarkMode());
+    appTheme = AppThemeModel.light;
+    // getAppThemeFromString(AppThemeModel.light); //DataPrefrences.getDarkMode());
     // log(appTheme.toString());
     isDark = appTheme == AppThemeModel.system
         ? getSystemTheme()

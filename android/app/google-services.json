@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "571241320724",
+    "project_id": "inbridge-8664f",
+    "storage_bucket": "inbridge-8664f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571241320724:android:ff04e74fce5380cee37201",
+        "android_client_info": {
+          "package_name": "com.example.inbridge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571241320724-6u9id845qr8u6qepgktk0vqnfhui7s0s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0Jln2DFiIeyIA4zCbUquGJQRC-S8WDmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571241320724-6u9id845qr8u6qepgktk0vqnfhui7s0s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

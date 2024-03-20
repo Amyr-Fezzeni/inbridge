@@ -15,7 +15,7 @@ class DefaultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var style = context.watch<ThemeNotifier>();
     return Scaffold(
-      appBar: appbar ? appBar(title, leading: leading) : null,
+      // appBar: appbar ? appBar(title, leading: leading) : null,
       backgroundColor: style.bgColor,
       body: Center(
           child: Text(

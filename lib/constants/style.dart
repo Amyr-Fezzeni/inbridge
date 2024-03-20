@@ -45,12 +45,12 @@ TextStyle titleblack = GoogleFonts.nunito(
 
 //colors
 
-const primaryColorLight = Color.fromARGB(255, 13, 1, 64);
-const primaryColorDark = Color.fromRGBO(213, 116, 10, 1);
+const primaryColorLight = Color.fromARGB(255, 255, 117, 142);
+const primaryColorDark = Color.fromARGB(213, 180, 7, 65);
 
-const secndaryClorLight = Color.fromRGBO(213, 116, 10, 1);
+const secndaryClorLight = Color.fromARGB(255, 255, 117, 142);
 
-const secndaryClorDark = Colors.lightBlue;
+const secndaryClorDark = Color.fromARGB(213, 180, 7, 65);
 
 // const blue = Color(0XFF0D0140); // Color.fromARGB(255, 117, 157, 226);
 // const darkBlue = Color.fromARGB(255, 16, 78, 184);
