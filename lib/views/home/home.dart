@@ -15,30 +15,32 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget card() => SizedBox(
           // height: 100,
-          width: 150,
+          width: 120,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 height: 100,
-                width: 150,
+                width: 120,
                 margin: const EdgeInsets.only(right: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(smallRadius),
                     color: Colors.grey),
               ),
-              Txt("Title"),
+              Txt("Title", bold: true),
               Row(
                 children: [
                   Icon(Icons.access_time_outlined,
                       size: 12, color: context.invertedColor.withOpacity(.7)),
                   const Gap(5),
-                  Txt('Now', size: 12),
+                  Txt('Now',
+                      size: 10, color: context.invertedColor.withOpacity(.7)),
                   const Gap(10),
                   const Icon(Icons.star, size: 15, color: Colors.orange),
                   const Gap(5),
-                  Txt('5.0 Rating', size: 12),
+                  Txt('5.0',
+                      size: 10, color: context.invertedColor.withOpacity(.7)),
                 ],
               )
             ],
@@ -55,11 +57,15 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [Image.asset(logo, width: 60), Txt("InBridge")],
+                    InkWell(
+                      onTap: () => Scaffold.of(context).openDrawer(),
+                      child: Icon(
+                        Icons.menu,
+                        color: context.invertedColor.withOpacity(.7),
+                        size: 30,
+                      ),
                     ),
-                    profileIcon(size: 50)
+                    logoWidget(),
                   ],
                 ),
                 const Gap(20),
@@ -81,6 +87,7 @@ class HomeScreen extends StatelessWidget {
                     Txt("Recent Projects", bold: true)
                   ],
                 ),
+                const Gap(10),
                 SizedBox(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -99,10 +106,14 @@ class HomeScreen extends StatelessWidget {
                     Txt("See all", bold: true)
                   ],
                 ),
+                const Gap(10),
                 SizedBox(
+                  width: double.infinity,
                   child: Wrap(
-                    spacing: 10,
+                    spacing: 0,
                     runSpacing: 10,
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
                     children: List.generate(
                       15,
                       (index) => card(),

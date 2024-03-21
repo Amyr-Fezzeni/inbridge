@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/views/settings/contact%20info/edit%20profile/phone/change_phone.dart';
 import 'package:inbridge/views/widgets/appbar.dart';
+import 'package:inbridge/views/widgets/default_screen.dart';
 import 'package:inbridge/views/widgets/loader.dart';
 import '../../../services/util/language.dart';
 import 'edit profile/name/change_name.dart';
@@ -34,7 +35,15 @@ class EditProfileScreen extends StatelessWidget {
                       : "Your Phone number",
                   icon: Icons.phone,
                   onClick: () => context.moveTo(const ChangePhone())),
-             
+              buildMenuTile(
+                  title: context.currentUser.university,
+                  subtitle: context.currentUser.grade,
+                  icon: Icons.school_outlined,
+                  onClick: () => context.moveTo(const DefaultScreen())),
+              buildMenuTile(
+                  title: context.currentUser.adress,
+                  icon: Icons.home,
+                  onClick: () => context.moveTo(const DefaultScreen())),
             ])));
   }
 }

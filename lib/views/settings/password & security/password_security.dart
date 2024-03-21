@@ -27,16 +27,6 @@ class PasswordSecurityScreen extends StatelessWidget {
                 subtitle: "change your password",
                 icon: Icons.lock_outline_rounded,
                 onClick: () => context.moveTo(const ChangePassword())),
-            buildMenuTile(
-                title: "Finger print",
-                subtitle: "Use your finger print to login.",
-                icon: Icons.fingerprint,
-                onClick: () {}),
-            buildMenuTile(
-                title: "Log in history",
-                subtitle: "Manage your logged in platforms",
-                icon: Icons.manage_history_rounded,
-                onClick: () {}),
           ],
         ),
       ),

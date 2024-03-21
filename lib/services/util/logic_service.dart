@@ -1,5 +1,7 @@
 import 'dart:convert';
-
+import 'dart:developer';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:crossplat_objectid/crossplat_objectid.dart';
 import 'package:crypto/crypto.dart';
 import 'language.dart';
@@ -8,17 +10,20 @@ String generateId() {
   ObjectId id1 = ObjectId();
   return id1.toHexString();
 }
+
 int createUniqueId() {
   return DateTime.now().millisecondsSinceEpoch.remainder(100000);
 }
+
 String generateMD5(String input) {
   return md5.convert(utf8.encode(input)).toString();
 }
 
 String capitalize(String text) {
-  return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
+  return text.isEmpty
+      ? text
+      : "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
 }
-
 
 double min(List<double> lst) {
   if (lst.isEmpty) return 0;
@@ -225,5 +230,13 @@ List<DateTime> getWeek(DateTime date) {
   return week;
 }
 
-
-
+Future<PlatformFile?> pickImage() async {
+  final result = await FilePicker.platform
+      .pickFiles(allowMultiple: false, type: FileType.image);
+  if (result == null) {
+    log("user canceled upload file");
+    return null;
+  } else {
+    return result.files.first;
+  }
+}

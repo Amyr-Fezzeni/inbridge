@@ -64,6 +64,7 @@ class UserModel {
       'grade': grade,
       'dateCreated': dateCreated.millisecondsSinceEpoch,
       'status': status.name,
+      'photo': photo,
       'fcm': fcm,
       'notificationStatus': notificationStatus
     };
@@ -86,6 +87,7 @@ class UserModel {
         password: map['password'] as String,
         adress: map['adress'] as String,
         university: map['university'] as String,
+        photo: map['photo'] ?? '',
         grade: map['grade'] as String,
         status: getUserStatusFromString(map['status']),
         notificationStatus: map['notificationStatus'] ?? true,
@@ -97,5 +99,6 @@ class UserModel {
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  String getFullName() => "${capitalize(firstName)} ${capitalize(lastName)}";
+  String getFullName() =>
+      "${firstName.isEmpty ? '' : capitalize(firstName)} ${lastName.isEmpty ? '' : capitalize(lastName)}";
 }

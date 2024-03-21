@@ -8,7 +8,7 @@ import 'package:inbridge/views/widgets/popup.dart';
 import 'util/language.dart';
 
 String? Function(dynamic) phoneNumberValidator = (value) {
-  return value.toString().length == 10
+  return value.toString().length == 8
       ? null
       : value.toString().isEmpty
           ? txt('Phone number is required')
@@ -73,7 +73,7 @@ Future<void> validatorPhone(
         cancel: false, description: "${txt('Empty phone number')}!");
     return;
   }
-  if (phone.length != 10) {
+  if (phone.length != 8) {
     popup(context, "Ok",
         cancel: false, description: "${txt('Invalid phone number')}!");
     return;

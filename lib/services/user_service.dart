@@ -225,6 +225,9 @@ class UserService {
   static Future<void> setNotificationSetting(bool value) async {
     await userCollection
         .doc(NavigationService.navigatorKey.currentContext!.userId)
-        .update({'notificationStatus': value});
+        .update({
+      'notificationStatus': value,
+      'fcm': value ? await NotificationService.getToken() : null
+    });
   }
 }

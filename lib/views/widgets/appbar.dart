@@ -52,9 +52,7 @@ import 'package:provider/provider.dart';
 // }
 
 AppBar appBar(String title,
-    {leading = true,
-    Widget action = const SizedBox(),
-    bool leadingProfile = false}) {
+    {leading = true, Widget? action, bool leadingProfile = false}) {
   var context = NavigationService.navigatorKey.currentContext!;
   return AppBar(
     backgroundColor: context.bgcolor,
@@ -77,21 +75,23 @@ AppBar appBar(String title,
                     child: Icon(Icons.arrow_back_ios_new_rounded,
                         size: 25, color: context.invertedColor.withOpacity(.7)))
                 : null),
-    actions: [
-      InkWell(
-          onTap: () {
-            bool isDark = NavigationService.navigatorKey.currentContext!
-                .read<ThemeNotifier>()
-                .isDark;
-            NavigationService.navigatorKey.currentContext!
-                .read<ThemeNotifier>()
-                .changeDarkMode(
-                    isDark ? AppThemeModel.light : AppThemeModel.dark);
-          },
-          child: Icon(Icons.dark_mode,
-              size: 25, color: context.invertedColor.withOpacity(.7))),
-      const Gap(20)
-    ],
+    actions: action != null
+        ? [action]
+        : [
+            InkWell(
+                onTap: () {
+                  bool isDark = NavigationService.navigatorKey.currentContext!
+                      .read<ThemeNotifier>()
+                      .isDark;
+                  NavigationService.navigatorKey.currentContext!
+                      .read<ThemeNotifier>()
+                      .changeDarkMode(
+                          isDark ? AppThemeModel.light : AppThemeModel.dark);
+                },
+                child: Icon(Icons.dark_mode,
+                    size: 25, color: context.invertedColor.withOpacity(.7))),
+            const Gap(20)
+          ],
   );
 }
 

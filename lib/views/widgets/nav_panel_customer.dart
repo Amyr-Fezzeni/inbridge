@@ -39,17 +39,7 @@ class NavPanel extends StatelessWidget {
                     profileIcon(size: 50),
                     Padding(
                         padding: const EdgeInsets.only(left: 10),
-                        child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Txt(context.currentUser.getFullName()),
-                              Txt(
-                                  context.currentUser.role == Role.creator
-                                      ? 'Creator'
-                                      : 'Admin',
-                                  style: context.text)
-                            ]))
+                        child: Txt(context.currentUser.getFullName()))
                   ]),
                   const SizedBox(height: 20),
                 ],
@@ -68,10 +58,8 @@ class NavPanel extends StatelessWidget {
                               radius: 25.0,
                               lineWidth: 4.0,
                               percent: 1,
-                              center: Txt(
-                                  "100%",
-                                  color: Colors.white,
-                                  size: 12),
+                              center:
+                                  Txt("100%", color: Colors.white, size: 12),
                               progressColor: Colors.white,
                             ),
                           );
@@ -94,18 +82,10 @@ class NavPanel extends StatelessWidget {
                 ),
               const Gap(10),
               buildMenuTile(
-                  title: txt('Profile'),
-                  icon: Icons.person,
-                  screen: const ProfileScreen()),
-              buildMenuTile(
                   title: txt('My stats'),
                   icon: Icons.bar_chart_rounded,
                   screen:
                       const DefaultScreen(title: 'My stats', leading: true)),
-              buildMenuTile(
-                  title: txt('Reports'),
-                  icon: Icons.pie_chart,
-                  screen: const DefaultScreen(title: 'Report', leading: true)),
               divider(bottom: 5),
               buildMenuTile(
                   title: txt('Settings'),

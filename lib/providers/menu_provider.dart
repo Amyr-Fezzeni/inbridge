@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inbridge/views/home/home.dart';
+import 'package:inbridge/views/profile/profile.dart';
 import 'package:inbridge/views/widgets/default_screen.dart';
 
 class MenuProvider with ChangeNotifier {
@@ -7,38 +8,24 @@ class MenuProvider with ChangeNotifier {
   int get currentPage => _currentPage;
 
   List<Map<String, dynamic>> screens = [
-    {'title': "", "icon": Icons.search, 'screen': const HomeScreen()},
+    {'title': "", "icon": Icons.home, 'screen': const HomeScreen()},
     {
-      'title': "Proposals",
+      'title': "Tasks",
       "icon": Icons.search,
       'screen': const DefaultScreen(
-        title: 'Proposals',
+        title: 'Tasks',
         appbar: false,
       )
     },
     {
-      'title': "Contracts",
+      'title': "Notifications",
       "icon": Icons.search,
       'screen': const DefaultScreen(
-        title: 'Contracts',
+        title: 'Notifications',
         appbar: false,
       )
     },
-    {
-      'title': "Messages",
-      "icon": Icons.search,
-      'screen': const DefaultScreen(
-        title: '',
-      )
-    },
-    {
-      'title': "Alerts",
-      "icon": Icons.search,
-      'screen': const DefaultScreen(
-        title: 'Alerts',
-        appbar: false,
-      )
-    }
+    {'title': "Profile", "icon": Icons.search, 'screen': const ProfileScreen()},
   ];
 
   void updateCurrentPage(int index) {

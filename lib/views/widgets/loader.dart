@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inbridge/constants/constants.dart';
+import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/services/util/language.dart';
 import 'package:inbridge/services/util/navigation_service.dart';
@@ -21,8 +22,7 @@ Widget divider({double bottom = 0, double top = 0}) => Padding(
       padding: EdgeInsets.only(top: top, bottom: bottom),
       child: Divider(
         height: 5,
-        color: NavigationService.navigatorKey.currentContext!.invertedColor
-            .withOpacity(.3),
+        color: secndaryClorDark.withOpacity(.1),
       ),
     );
 

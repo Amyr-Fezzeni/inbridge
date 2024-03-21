@@ -6,7 +6,6 @@ UserStatus getUserStatusFromString(String? value) =>
     {
       'active': UserStatus.active,
       'banned': UserStatus.banned,
-      'disabled': UserStatus.disabled,
       'deleted': UserStatus.deleted
     }[value] ??
     UserStatus.disabled;

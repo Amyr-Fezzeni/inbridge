@@ -18,7 +18,7 @@ Widget gradientButton(
         double raduis = bigRadius,
         double h = 40}) =>
     Container(
-      width: w,
+      width: NavigationService.navigatorKey.currentContext!.w * .7,
       constraints: BoxConstraints(minHeight: h),
       margin: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
@@ -170,24 +170,18 @@ Widget socialMediaButton(
 }
 
 Widget logoWidget({void Function()? ontap, double size = 60}) {
-  return Row(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      Image(image: const AssetImage('assets/icons/logo1.png'), width: size),
-      Txt('Les inbridges'.toUpperCase(),
-          style: NavigationService.navigatorKey.currentContext!.title.copyWith(
-              fontSize: size * .4,
-              color: NavigationService
-                  .navigatorKey.currentContext!.invertedColor
-                  .withOpacity(.7)))
-    ],
+  return InkWell(
+    onTap: ontap,
+    child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [Image.asset(logo, width: 60), Txt("InBridge")]),
   );
 }
 
 Widget profileIcon(
     {void Function()? ontap,
     double size = 40,
-    double radius = 50,
+    double radius = 100,
     bool shadow = true}) {
   return Builder(builder: (context) {
     return Center(
@@ -198,25 +192,14 @@ Widget profileIcon(
           width: size,
           decoration: BoxDecoration(
               boxShadow: shadow ? defaultShadow : null,
-              border: Border.all(
-                  color: NavigationService
-                      .navigatorKey.currentContext!.invertedColor
-                      .withOpacity(.1)),
-              color: NavigationService.navigatorKey.currentContext!.bgcolor,
+              border: Border.all(width: 3, color: context.primaryColor),
+              color: context.bgcolor,
               borderRadius: BorderRadius.circular(radius)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(radius),
-            child: NavigationService
-                    .navigatorKey.currentContext!.currentUser.photo.isNotEmpty
-                ? Image.network(
-                    NavigationService
-                        .navigatorKey.currentContext!.currentUser.photo,
-                    fit: BoxFit.cover,
-                  )
-                : Image.asset(
-                    profileImg,
-                    fit: BoxFit.cover,
-                  ),
+            child: context.currentUser.photo.isNotEmpty
+                ? Image.network(context.currentUser.photo, fit: BoxFit.cover)
+                : Image.asset(profileImg, fit: BoxFit.cover),
           ),
         ),
       ),

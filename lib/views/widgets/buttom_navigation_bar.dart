@@ -56,11 +56,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    iconBar(Icons.home_outlined, txt('Home'), 0),
+                    iconBar(
+                        Icons.photo_size_select_actual_rounded, txt('Home'), 0),
                     iconBar(Icons.checklist_rounded, txt('Tasks'), 1),
                     const Gap(20),
                     iconBar(Icons.notifications_none, txt('Notifications'), 2),
-                    iconBar(Icons.person_outline_rounded, txt('Profile'), 3),
+                    iconBar(Icons.people_alt_outlined, txt('Profile'), 3),
                   ]),
             ),
           ),

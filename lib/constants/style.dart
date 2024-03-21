@@ -36,15 +36,17 @@ const double smallRadius = 8;
 const double bigRadius = 20;
 
 // text
-TextStyle text18black = GoogleFonts.nunito(color: Colors.black87, fontSize: 14);
-TextStyle text18white = GoogleFonts.nunito(color: Colors.white, fontSize: 14);
-TextStyle titleWhite = GoogleFonts.nunito(
+TextStyle text18black =
+    GoogleFonts.poppins(color: Colors.black87, fontSize: 14);
+TextStyle text18white = GoogleFonts.poppins(color: Colors.white, fontSize: 14);
+TextStyle titleWhite = GoogleFonts.poppins(
     color: Colors.white, fontSize: 35, fontWeight: FontWeight.w800);
-TextStyle titleblack = GoogleFonts.nunito(
+TextStyle titleblack = GoogleFonts.poppins(
     color: Colors.black87, fontSize: 35, fontWeight: FontWeight.w800);
 
-//colors
 
+
+//colors
 const primaryColorLight = Color.fromARGB(255, 255, 117, 142);
 const primaryColorDark = Color.fromARGB(213, 180, 7, 65);
 
