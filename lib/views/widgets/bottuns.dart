@@ -192,7 +192,7 @@ Widget profileIcon(
           width: size,
           decoration: BoxDecoration(
               boxShadow: shadow ? defaultShadow : null,
-              border: Border.all(width: 3, color: context.primaryColor),
+              border: Border.all(width: 4, color: red),
               color: context.bgcolor,
               borderRadius: BorderRadius.circular(radius)),
           child: ClipRRect(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:inbridge/constants/constants.dart';
 import 'package:inbridge/constants/fixed_messages.dart';
 import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/models/user.dart';

@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:inbridge/models/enum_classes.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:inbridge/services/util/ext.dart';
-import 'package:inbridge/views/profile/profile.dart';
 import 'package:inbridge/views/widgets/bottuns.dart';
 import 'package:inbridge/views/widgets/default_screen.dart';
 import 'package:inbridge/views/widgets/loader.dart';

@@ -16,8 +16,8 @@ class ThemeNotifier with ChangeNotifier {
   Color invertedColor = darkBgColor;
   Color navBarColor = lightnavBarColor;
   Color panelColor = lightPanelColor;
-  Color primaryColor = primaryColorLight;
-  Color secondaryColor = secndaryClorLight;
+  Color primaryColor = pink;
+  Color secondaryColor = red;
 
   void changeDarkMode(AppThemeModel value) async {
     isDark = value == AppThemeModel.system
@@ -31,8 +31,8 @@ class ThemeNotifier with ChangeNotifier {
         title = titleWhite;
         invertedColor = lightBgColor;
         navBarColor = darknavBarColor;
-        primaryColor = primaryColorDark;
-        secondaryColor = secndaryClorDark;
+        primaryColor = pink;
+        secondaryColor = red;
         break;
       case false:
         bgColor = lightBgColor;
@@ -41,8 +41,8 @@ class ThemeNotifier with ChangeNotifier {
         title = titleblack;
         invertedColor = darkBgColor;
         navBarColor = lightnavBarColor;
-        primaryColor = primaryColorLight;
-        secondaryColor = secndaryClorLight;
+        primaryColor = pink;
+        secondaryColor = red;
         break;
       default:
         break;
@@ -67,8 +67,8 @@ class ThemeNotifier with ChangeNotifier {
         title = titleWhite;
         invertedColor = lightBgColor;
         navBarColor = darknavBarColor;
-        primaryColor = primaryColorDark;
-        secondaryColor = secndaryClorDark;
+        primaryColor = pink;
+        secondaryColor = red;
 
         break;
       case false:
@@ -78,8 +78,8 @@ class ThemeNotifier with ChangeNotifier {
         title = titleblack;
         invertedColor = darkBgColor;
         navBarColor = lightnavBarColor;
-        primaryColor = primaryColorLight;
-        secondaryColor = secndaryClorLight;
+        primaryColor = pink;
+        secondaryColor = red;
 
         break;
       default:
@@ -105,8 +105,8 @@ class ThemeNotifier with ChangeNotifier {
             title = titleWhite;
             invertedColor = lightBgColor;
             navBarColor = darknavBarColor;
-            primaryColor = primaryColorDark;
-            secondaryColor = secndaryClorDark;
+            primaryColor = pink;
+            secondaryColor = red;
             break;
           case false:
             bgColor = lightBgColor;
@@ -115,8 +115,8 @@ class ThemeNotifier with ChangeNotifier {
             title = titleblack;
             invertedColor = darkBgColor;
             navBarColor = lightnavBarColor;
-            primaryColor = primaryColorLight;
-            secondaryColor = secndaryClorLight;
+            primaryColor = pink;
+            secondaryColor = red;
             break;
           default:
             break;

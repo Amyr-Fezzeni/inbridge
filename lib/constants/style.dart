@@ -47,25 +47,9 @@ TextStyle titleblack = GoogleFonts.poppins(
 
 
 //colors
-const primaryColorLight = Color.fromARGB(255, 255, 117, 142);
-const primaryColorDark = Color.fromARGB(213, 180, 7, 65);
-
-const secndaryClorLight = Color.fromARGB(255, 255, 117, 142);
-
-const secndaryClorDark = Color.fromARGB(213, 180, 7, 65);
-
-// const blue = Color(0XFF0D0140); // Color.fromARGB(255, 117, 157, 226);
-// const darkBlue = Color.fromARGB(255, 16, 78, 184);
-
-// const lightBlue = Color.fromARGB(255, 70, 186, 241);
-
-// const pink = Color.fromARGB(255, 225, 181, 244);
-
-// const violet = Color.fromARGB(255, 187, 165, 239);
-
-// Color violet = const Color.fromARGB(255, 90, 39, 124);
-
-Color darkGray = const Color.fromARGB(255, 53, 53, 53);
-// Color blueBtn = const Color.fromARGB(255, 82, 111, 226);
-const red = Color.fromARGB(255, 249, 89, 78);
+const pink = Color.fromARGB(255, 255, 117, 142);
+const red = Color.fromARGB(213, 180, 7, 65);
 const darkRed = Color.fromARGB(255, 159, 11, 0);
+Color darkGray = const Color.fromARGB(255, 53, 53, 53);
+
+

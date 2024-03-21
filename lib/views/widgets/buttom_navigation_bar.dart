@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:inbridge/constants/constants.dart';
 import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/views/widgets/loader.dart';
@@ -76,7 +74,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                     width: 50,
                     decoration: BoxDecoration(
                         boxShadow: defaultShadow,
-                        color: secndaryClorDark,
+                        color: red,
                         borderRadius: BorderRadius.circular(100)),
                     child: const Icon(Icons.add, color: Colors.white, size: 35),
                   ),

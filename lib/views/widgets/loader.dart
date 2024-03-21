@@ -22,7 +22,7 @@ Widget divider({double bottom = 0, double top = 0}) => Padding(
       padding: EdgeInsets.only(top: top, bottom: bottom),
       child: Divider(
         height: 5,
-        color: secndaryClorDark.withOpacity(.1),
+        color: red.withOpacity(.1),
       ),
     );
 

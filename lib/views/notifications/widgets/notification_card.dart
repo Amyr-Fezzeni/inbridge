@@ -13,11 +13,11 @@ class NotificationWidget extends StatelessWidget {
   Future<void> seen(String id) async {}
   Color getTypeColor(String type) {
     switch (type) {
-      case "inbridge":
+      case "system":
         return Colors.amber;
-      case "essage":
-        return primaryColorLight;
-      case "ost":
+      case "post":
+        return pink;
+      case "task":
         return red;
       default:
         return const Color.fromARGB(255, 255, 187, 85);

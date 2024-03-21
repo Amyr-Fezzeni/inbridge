@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/services.dart';
 import 'package:crossplat_objectid/crossplat_objectid.dart';
 import 'package:crypto/crypto.dart';
 import 'language.dart';
@@ -233,6 +232,7 @@ List<DateTime> getWeek(DateTime date) {
 Future<PlatformFile?> pickImage() async {
   final result = await FilePicker.platform
       .pickFiles(allowMultiple: false, type: FileType.image);
+  log(result.toString());
   if (result == null) {
     log("user canceled upload file");
     return null;

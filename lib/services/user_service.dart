@@ -4,7 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:inbridge/models/notification/notification.dart';
 import 'package:inbridge/providers/notification_provider.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/services/util/logic_service.dart';

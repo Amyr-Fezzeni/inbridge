@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:inbridge/constants/constants.dart';
-import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/providers/theme_notifier.dart';
-import 'package:inbridge/providers/user_provider.dart';
 import 'package:inbridge/services/shared_data.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/services/util/language.dart';
