@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+import 'package:inbridge/constants/constants.dart';
 import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/views/widgets/loader.dart';
@@ -20,7 +21,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           HapticFeedback.lightImpact();
         },
         child: url != null
-            ? svgImage(url, selected: context.currentPage == index)
+            ? pngIcon(url, selected: context.currentPage == index)
             : Icon(
                 icon,
                 size: 25,
@@ -55,11 +56,15 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     iconBar(
-                        Icons.photo_size_select_actual_rounded, txt('Home'), 0),
-                    iconBar(Icons.checklist_rounded, txt('Tasks'), 1),
+                        Icons.photo_size_select_actual_rounded, txt('Home'), 0,
+                        url: homeIcon),
+                    iconBar(Icons.checklist_rounded, txt('Tasks'), 1,
+                        url: tasksIcon),
                     const Gap(20),
-                    iconBar(Icons.notifications_none, txt('Notifications'), 2),
-                    iconBar(Icons.people_alt_outlined, txt('Profile'), 3),
+                    iconBar(Icons.notifications_none, txt('Notifications'), 2,
+                        url: notificationIcon),
+                    iconBar(Icons.people_alt_outlined, txt('Statistics'), 3,
+                        url: statisticIcon),
                   ]),
             ),
           ),

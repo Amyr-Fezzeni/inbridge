@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:inbridge/constants/constants.dart';
 import 'package:inbridge/constants/style.dart';
+import 'package:inbridge/models/enum_classes.dart';
 import 'package:inbridge/providers/theme_notifier.dart';
 import 'package:inbridge/services/util/language.dart';
 import 'package:inbridge/services/util/navigation_service.dart';
@@ -182,27 +183,38 @@ Widget profileIcon(
     {void Function()? ontap,
     double size = 40,
     double radius = 100,
+    bool showBadge = true,
     bool shadow = true}) {
   return Builder(builder: (context) {
-    return Center(
-      child: InkWell(
-        onTap: ontap,
-        child: Container(
-          height: size,
-          width: size,
-          decoration: BoxDecoration(
-              boxShadow: shadow ? defaultShadow : null,
-              border: Border.all(width: 4, color: red),
-              color: context.bgcolor,
-              borderRadius: BorderRadius.circular(radius)),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(radius),
-            child: context.currentUser.photo.isNotEmpty
-                ? Image.network(context.currentUser.photo, fit: BoxFit.cover)
-                : Image.asset(profileImg, fit: BoxFit.cover),
+    return Stack(
+      children: [
+        Center(
+          child: InkWell(
+            onTap: ontap,
+            child: Container(
+              height: size,
+              width: size,
+              decoration: BoxDecoration(
+                  boxShadow: shadow ? defaultShadow : null,
+                  border: Border.all(width: 4, color: red),
+                  color: context.bgcolor,
+                  borderRadius: BorderRadius.circular(radius)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(radius),
+                child: context.currentUser.photo.isNotEmpty
+                    ? Image.network(context.currentUser.photo,
+                        fit: BoxFit.cover)
+                    : Image.asset(profileImg, fit: BoxFit.cover),
+              ),
+            ),
           ),
         ),
-      ),
+        if (context.currentUser.role == Role.admin && showBadge)
+          Positioned(
+              bottom: 0,
+              right: 0,
+              child: pngIcon(adminIcon, size: size / 3, color: null))
+      ],
     );
   });
 }

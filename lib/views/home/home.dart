@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:inbridge/constants/constants.dart';
-import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/services/util/language.dart';
 import 'package:inbridge/views/widgets/bottuns.dart';
@@ -13,40 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget card() => SizedBox(
-          // height: 100,
-          width: 120,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: 100,
-                width: 120,
-                margin: const EdgeInsets.only(right: 10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(smallRadius),
-                    color: Colors.grey),
-              ),
-              Txt("Title", bold: true),
-              Row(
-                children: [
-                  Icon(Icons.access_time_outlined,
-                      size: 12, color: context.invertedColor.withOpacity(.7)),
-                  const Gap(5),
-                  Txt('Now',
-                      size: 10, color: context.invertedColor.withOpacity(.7)),
-                  const Gap(10),
-                  const Icon(Icons.star, size: 15, color: Colors.orange),
-                  const Gap(5),
-                  Txt('5.0',
-                      size: 10, color: context.invertedColor.withOpacity(.7)),
-                ],
-              )
-            ],
-          ),
-        );
-    return Scaffold(
+   return Scaffold(
       backgroundColor: context.bgcolor,
       body: SingleChildScrollView(
         child: Padding(

@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:inbridge/constants/style.dart';
+import 'package:inbridge/constants/constants.dart';
 import 'package:inbridge/services/util/logic_service.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/views/widgets/loader.dart';
 import 'package:inbridge/views/widgets/text_field.dart';
-import '../../constants/constants.dart';
+// import '../../constants/constants.dart';
 import '../../services/util/language.dart';
 import '../../services/user_service.dart';
 import '../../views/widgets/bottuns.dart';
@@ -66,31 +66,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Center(
                   child: Stack(
                     children: [
-                      profileIcon(size: 150),
-                      Positioned(
-                          bottom: 5,
-                          right: 5,
-                          child: InkWell(
-                            onTap: () async {
-                              final file = await pickImage();
-                              if (file == null) return;
+                      profileIcon(
+                        size: 150,
+                        ontap: () async {
+                          final file = await pickImage();
+                          if (file == null) return;
 
-                              await UserService.uploadUserImage(
-                                  await UserService.uploadImage(
-                                      File(file.path.toString()),
-                                      folder: 'profile',
-                                      type: file.extension.toString()));
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  boxShadow: defaultShadow,
-                                  color: red,
-                                  borderRadius: BorderRadius.circular(100)),
-                              child: const Icon(Icons.camera_alt_outlined,
-                                  color: Colors.white, size: 25),
-                            ),
-                          ))
+                          await UserService.uploadUserImage(
+                              await UserService.uploadImage(
+                                  File(file.path.toString()),
+                                  folder: 'profile',
+                                  type: file.extension.toString()));
+                        },
+                      ),
+                      // Positioned(
+                      //     top: 5,
+                      //     right: 5,
+                      //     child: InkWell(
+                      //       onTap: () async {
+                      //         final file = await pickImage();
+                      //         if (file == null) return;
+
+                      //         await UserService.uploadUserImage(
+                      //             await UserService.uploadImage(
+                      //                 File(file.path.toString()),
+                      //                 folder: 'profile',
+                      //                 type: file.extension.toString()));
+                      //       },
+                      //       child: Container(
+                      //         padding: const EdgeInsets.all(5),
+                      //         decoration: BoxDecoration(
+                      //             boxShadow: defaultShadow,
+                      //             color: red,
+                      //             borderRadius: BorderRadius.circular(100)),
+                      //         child: const Icon(Icons.camera_alt_outlined,
+                      //             color: Colors.white, size: 25),
+                      //       ),
+                      //     ))
                     ],
                   ),
                 ),
@@ -102,7 +114,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 controller: TextEditingController(),
                 leadingIcon: Icon(Icons.search,
                     color: context.invertedColor.withOpacity(.7), size: 25),
-                icon: svgImage(filter, size: 25, function: () {}),
+                icon: pngIcon(
+                  filterIcon,
+                  size: 25,
+                  function: () {},
+                ),
                 height: 50,
               ),
               const Gap(20),
@@ -114,16 +130,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const Gap(10),
               showPublic
-                  ? Container(
-                      height: 500,
-                      width: context.w,
-                      color: Colors.red,
+                  ? SizedBox(
+                      width: double.infinity,
+                      child: Wrap(
+                        spacing: 0,
+                        runSpacing: 10,
+                        alignment: WrapAlignment.center,
+                        runAlignment: WrapAlignment.center,
+                        children: List.generate(
+                          15,
+                          (index) => card(),
+                        ),
+                      ),
                     )
-                  : Container(
-                      height: 500,
-                      width: context.w,
-                      color: Colors.amber,
-                    )
+                  : SizedBox(
+                      width: double.infinity,
+                      child: Wrap(
+                        spacing: 0,
+                        runSpacing: 10,
+                        alignment: WrapAlignment.center,
+                        runAlignment: WrapAlignment.center,
+                        children: List.generate(
+                          5,
+                          (index) => card(),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),
