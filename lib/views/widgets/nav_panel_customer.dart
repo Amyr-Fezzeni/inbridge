@@ -1,6 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:inbridge/models/app_settings/theme.dart';
 import 'package:inbridge/models/enum_classes.dart';
+import 'package:inbridge/views/profile/profile.dart';
+import 'package:inbridge/views/settings/contact%20info/contact_info.dart';
+import 'package:inbridge/views/settings/language/language_screen.dart';
+import 'package:inbridge/views/settings/password%20&%20security/password/change_password.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/views/widgets/bottuns.dart';
@@ -30,19 +36,23 @@ class NavPanel extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Row(children: [
-                    profileIcon(size: 50),
-                    Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Txt(context.currentUser.getFullName()))
-                  ]),
-                  const SizedBox(height: 20),
-                ],
+              const Gap(30),
+              InkWell(
+                onTap: () {
+                  Scaffold.of(context).closeDrawer();
+                  Future.delayed(const Duration(milliseconds: 100))
+                      .then((value) => context.moveTo(const ProfileScreen()));
+                },
+                child: Row(children: [
+                  profileIcon(size: 50),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Txt(context.currentUser.getFullName()))
+                ]),
               ),
+              const Gap(20),
               if (context.currentUser.role == Role.creator)
                 Card(
                   color: context.primaryColor,
@@ -81,21 +91,49 @@ class NavPanel extends StatelessWidget {
                 ),
               const Gap(10),
               buildMenuTile(
-                  title: txt('My stats'),
-                  icon: Icons.bar_chart_rounded,
-                  screen:
-                      const DefaultScreen(title: 'My stats', leading: true)),
+                  title: txt('Edit informations'),
+                  icon: Icons.edit_note,
+                  screen: const EditProfileScreen()),
+              buildMenuTile(
+                  title: txt('Change password'),
+                  icon: Icons.lock,
+                  screen: const ChangePassword()),
               divider(bottom: 5),
+              Padding(
+                padding: const EdgeInsets.only(left: 0),
+                child: Txt('App Settings', color: context.primaryColor),
+              ),
+              divider(bottom: 10),
               buildMenuTile(
-                  title: txt('Settings'),
-                  icon: Icons.settings,
-                  screen: const SettingsScreen()),
-              buildMenuTile(
-                  title: txt('Help & Support'),
-                  icon: Icons.contact_support_outlined,
-                  screen: const DefaultScreen(
-                      title: 'Helps & support', leading: true)),
-              const Spacer(),
+                  title: 'Language',
+                  icon: Icons.language_rounded,
+                  screen: const LanguageScreen()),
+              ListTile(
+                  title: Txt("App theme"),
+                  trailing: CupertinoSwitch(
+                      value: context.isDark,
+                      activeColor: context.primaryColor,
+                      onChanged: (value) {
+                        context.theme.changeDarkMode(
+                            value ? AppThemeModel.dark : AppThemeModel.light);
+                      })),
+              ListTile(
+                  title: Txt("Notification"),
+                  trailing: CupertinoSwitch(
+                      value: context.currentUser.notificationStatus,
+                      activeColor: context.primaryColor,
+                      onChanged: (value) {
+                        context.notificationProvider
+                            .updateNotificationStatus(value);
+                      })),
+              const SizedBox(
+                height: 20,
+              ),
+              // buildMenuTile(
+              //     title: txt('Settings'),
+              //     icon: Icons.settings,
+              //     screen: const SettingsScreen()),
+              divider(bottom: 5),
               Builder(builder: (context) {
                 return InkWell(
                   onTap: () async {
@@ -112,17 +150,17 @@ class NavPanel extends StatelessWidget {
                             description: '${txt(logoutMessage)}?'));
                   },
                   child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 5),
+                        padding: const EdgeInsets.only(right: 5, left: 15),
                         child: Icon(
                           Icons.logout_rounded,
                           color: context.invertedColor.withOpacity(.7),
                           size: 25,
                         ),
                       ),
-                      Txt("Log Out")
+                      Txt("Logout")
                     ],
                   ),
                 );

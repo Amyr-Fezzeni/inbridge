@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:inbridge/constants/constants.dart';
 import 'package:inbridge/services/util/logic_service.dart';
 import 'package:inbridge/services/util/ext.dart';
+import 'package:inbridge/views/widgets/appbar.dart';
 import 'package:inbridge/views/widgets/loader.dart';
 import 'package:inbridge/views/widgets/text_field.dart';
 // import '../../constants/constants.dart';
@@ -55,6 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: context.bgcolor,
       extendBodyBehindAppBar: false,
+      appBar: appBar('Profile'),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(

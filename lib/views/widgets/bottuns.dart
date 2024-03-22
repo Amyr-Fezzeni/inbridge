@@ -19,7 +19,7 @@ Widget gradientButton(
         double raduis = bigRadius,
         double h = 40}) =>
     Container(
-      width: NavigationService.navigatorKey.currentContext!.w * .7,
+      width: w,
       constraints: BoxConstraints(minHeight: h),
       margin: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(

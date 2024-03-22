@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/views/settings/contact%20info/edit%20profile/phone/change_phone.dart';
+import 'package:inbridge/views/settings/password%20&%20security/email/change_email.dart';
+import 'package:inbridge/views/settings/password%20&%20security/password/change_password.dart';
 import 'package:inbridge/views/widgets/appbar.dart';
 import 'package:inbridge/views/widgets/default_screen.dart';
 import 'package:inbridge/views/widgets/loader.dart';
@@ -35,6 +37,16 @@ class EditProfileScreen extends StatelessWidget {
                       : "Your Phone number",
                   icon: Icons.phone,
                   onClick: () => context.moveTo(const ChangePhone())),
+              buildMenuTile(
+                  title: "Email",
+                  subtitle: "change your Email",
+                  icon: Icons.email_outlined,
+                  onClick: () => context.moveTo(const ChangeEmail())),
+              buildMenuTile(
+                  title: "Password",
+                  subtitle: "change your password",
+                  icon: Icons.lock_outline_rounded,
+                  onClick: () => context.moveTo(const ChangePassword())),
               buildMenuTile(
                   title: context.currentUser.university,
                   subtitle: context.currentUser.grade,

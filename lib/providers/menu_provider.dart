@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inbridge/views/home/home.dart';
 import 'package:inbridge/views/profile/profile.dart';
+import 'package:inbridge/views/statistics/statistics_screen.dart';
 import 'package:inbridge/views/widgets/default_screen.dart';
 
 class MenuProvider with ChangeNotifier {
@@ -25,7 +26,11 @@ class MenuProvider with ChangeNotifier {
         appbar: false,
       )
     },
-    {'title': "Profile", "icon": Icons.search, 'screen': const ProfileScreen()},
+    {
+      'title': "Statistics",
+      "icon": Icons.search,
+      'screen': const StatisticsScreen()
+    },
   ];
 
   void updateCurrentPage(int index) {
