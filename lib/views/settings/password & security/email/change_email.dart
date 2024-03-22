@@ -9,7 +9,6 @@ import 'package:inbridge/services/util/language.dart';
 import 'package:inbridge/services/validators.dart';
 import 'package:inbridge/views/widgets/bottuns.dart';
 
-
 class ChangeEmail extends StatefulWidget {
   const ChangeEmail({super.key});
 
@@ -34,14 +33,9 @@ class _ChangeEmailState extends State<ChangeEmail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar('Email'),
-      body: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-          color: context.bgcolor,
-        ),
-        child: Center(
-            child: Column(
+      backgroundColor: context.bgcolor,
+      body: SingleChildScrollView(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Gap(30),
@@ -70,7 +64,7 @@ class _ChangeEmailState extends State<ChangeEmail> {
                     .read<UserProvider>()
                     .changeEmail(context, newEmail.text)),
           ],
-        )),
+        ),
       ),
     );
   }
