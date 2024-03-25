@@ -18,6 +18,7 @@ extension ContextExt on BuildContext {
   TextStyle get text => watch<ThemeNotifier>().text18;
   TextStyle get title => watch<ThemeNotifier>().title;
   Color get bgcolor => watch<ThemeNotifier>().bgColor;
+  Color get iconColor => invertedColor.withOpacity(.7);
   Color get primaryColor => watch<ThemeNotifier>().primaryColor;
   Color get secondaryColor => watch<ThemeNotifier>().secondaryColor;
   Color get invertedColor => watch<ThemeNotifier>().invertedColor;

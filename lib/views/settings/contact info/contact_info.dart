@@ -17,7 +17,7 @@ class EditProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: context.bgcolor,
-        appBar: appBar('Contact info'),
+        appBar: appBar('Edit Profile'),
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(children: [

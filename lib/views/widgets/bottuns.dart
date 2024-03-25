@@ -170,12 +170,13 @@ Widget socialMediaButton(
   );
 }
 
-Widget logoWidget({void Function()? ontap, double size = 60}) {
+Widget logoWidget(
+    {void Function()? ontap, double size = 60, bool title = false}) {
   return InkWell(
     onTap: ontap,
     child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [Image.asset(logo, width: 60), Txt("InBridge")]),
+        children: [Image.asset(logo, width: 60), if (title) Txt("InBridge")]),
   );
 }
 

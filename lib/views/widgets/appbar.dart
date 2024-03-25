@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/models/app_settings/theme.dart';
 import 'package:inbridge/providers/theme_notifier.dart';
 import 'package:inbridge/services/util/language.dart';
@@ -58,7 +59,7 @@ AppBar appBar(String title,
     backgroundColor: context.bgcolor,
     surfaceTintColor: context.bgcolor,
     shadowColor: Colors.black45,
-    elevation: 0,
+    elevation: 2,
     title: Txt(title,
         style:
             context.text.copyWith(fontWeight: FontWeight.bold, fontSize: 16)),
@@ -88,8 +89,7 @@ AppBar appBar(String title,
                       .changeDarkMode(
                           isDark ? AppThemeModel.light : AppThemeModel.dark);
                 },
-                child: Icon(Icons.dark_mode,
-                    size: 25, color: context.invertedColor.withOpacity(.7))),
+                child: logoWidget()),
             const Gap(20)
           ],
   );

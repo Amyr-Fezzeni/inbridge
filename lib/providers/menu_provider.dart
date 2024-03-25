@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inbridge/views/home/home.dart';
+import 'package:inbridge/views/notifications/notifications.dart';
 import 'package:inbridge/views/profile/profile.dart';
 import 'package:inbridge/views/statistics/statistics_screen.dart';
+import 'package:inbridge/views/tasks/tasks_screen.dart';
 import 'package:inbridge/views/widgets/default_screen.dart';
 
 class MenuProvider with ChangeNotifier {
@@ -12,19 +14,13 @@ class MenuProvider with ChangeNotifier {
     {'title': "", "icon": Icons.home, 'screen': const HomeScreen()},
     {
       'title': "Tasks",
-      "icon": Icons.search,
-      'screen': const DefaultScreen(
-        title: 'Tasks',
-        appbar: false,
-      )
+      "icon": Icons.format_list_bulleted_rounded,
+      'screen': const TasksScreen()
     },
     {
       'title': "Notifications",
       "icon": Icons.search,
-      'screen': const DefaultScreen(
-        title: 'Notifications',
-        appbar: false,
-      )
+      'screen': const NotificationScreen()
     },
     {
       'title': "Statistics",

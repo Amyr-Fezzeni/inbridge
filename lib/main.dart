@@ -5,6 +5,7 @@ import 'package:inbridge/providers/notification_provider.dart';
 import 'package:inbridge/providers/theme_notifier.dart';
 import 'package:inbridge/providers/user_provider.dart';
 import 'package:inbridge/services/shared_data.dart';
+import 'package:inbridge/services/util/ext.dart';
 import 'package:inbridge/services/util/navigation_service.dart';
 import 'package:inbridge/views/splash%20screen/custom_splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
+
   await DataPrefrences.init();
   runApp(
     MultiProvider(
@@ -38,9 +39,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorKey: NavigationService.navigatorKey,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
+              .copyWith(background: context.bgcolor)),
       home: const CustomSplashScreen(),
     );
   }

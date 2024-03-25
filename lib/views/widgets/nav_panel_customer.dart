@@ -94,10 +94,19 @@ class NavPanel extends StatelessWidget {
                   title: txt('Edit informations'),
                   icon: Icons.edit_note,
                   screen: const EditProfileScreen()),
-              buildMenuTile(
-                  title: txt('Change password'),
-                  icon: Icons.lock,
-                  screen: const ChangePassword()),
+              if (context.currentUser.role == Role.admin)
+                buildMenuTile(
+                    title: txt('Users Management'),
+                    icon: Icons.supervised_user_circle_rounded,
+                    screen: const DefaultScreen(
+                      title: "Users",
+                      appbar: true,
+                      leading: true,
+                    )),
+              // buildMenuTile(
+              //     title: txt('Change password'),
+              //     icon: Icons.lock,
+              //     screen: const ChangePassword()),
               divider(bottom: 5),
               Padding(
                 padding: const EdgeInsets.only(left: 0),

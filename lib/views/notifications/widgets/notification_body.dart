@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:inbridge/constants/constants.dart';
+import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/services/util/ext.dart';
+import 'package:inbridge/views/widgets/loader.dart';
 import '../../../services/util/language.dart';
 import 'notification_card.dart';
 
@@ -35,11 +38,12 @@ class _NotificationBodyState extends State<NotificationBody>
                   const Spacer(
                     flex: 1,
                   ),
-                  Icon(
-                    Icons.notifications,
-                    color: context.invertedColor.withOpacity(.5),
-                    size: 120,
-                  ),
+                  pngIcon(notificationIcon, size: 120, selected: true),
+                  // Icon(
+                  //   Icons.notifications,
+                  //   color: context.primaryColor.withOpacity(1),
+                  //   size: 120,
+                  // ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Text(
@@ -68,13 +72,8 @@ class _NotificationBodyState extends State<NotificationBody>
                 padding: const EdgeInsets.only(top: 15),
                 child: Column(
                   children: [
-                   
-                    ...context
-                        .watchNotification
-                        .notifications
-                        .reversed
-                        .map((e) => NotificationWidget(notification: e))
-                        ,
+                    ...context.watchNotification.notifications.reversed
+                        .map((e) => NotificationWidget(notification: e)),
                     const SizedBox(
                       height: 50,
                     ),
