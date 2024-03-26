@@ -37,8 +37,8 @@ const double bigRadius = 20;
 
 // text
 TextStyle text18black =
-    GoogleFonts.poppins(color: Colors.black87, fontSize: 14);
-TextStyle text18white = GoogleFonts.poppins(color: Colors.white, fontSize: 14);
+    GoogleFonts.poppins(color: Colors.black87, fontSize: 12);
+TextStyle text18white = GoogleFonts.poppins(color: Colors.white, fontSize: 12);
 TextStyle titleWhite = GoogleFonts.poppins(
     color: Colors.white, fontSize: 35, fontWeight: FontWeight.w800);
 TextStyle titleblack = GoogleFonts.poppins(

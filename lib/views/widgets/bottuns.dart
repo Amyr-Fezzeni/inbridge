@@ -48,7 +48,7 @@ Widget gradientButton(
             Text(
               text,
               style: NavigationService.navigatorKey.currentContext!.text
-                  .copyWith(fontSize: 14, color: Colors.white),
+                  .copyWith(fontSize: 12, color: Colors.white),
               textAlign: TextAlign.center,
             ),
             if (widget != null) ...[
