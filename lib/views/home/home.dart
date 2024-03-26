@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       backgroundColor: context.bgcolor,
       body: SingleChildScrollView(
         child: Padding(
@@ -40,7 +40,8 @@ class HomeScreen extends StatelessWidget {
                   controller: TextEditingController(),
                   leadingIcon: Icon(Icons.search,
                       color: context.invertedColor.withOpacity(.7), size: 25),
-                  icon: svgImage(filter, size: 25, function: () {}),
+                  icon: svgImage(filter,
+                      size: 25, function: () {}, color: context.iconColor),
                   marginH: 0,
                   height: 50,
                 ),

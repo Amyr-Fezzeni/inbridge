@@ -20,6 +20,7 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
+  bool showPublic = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,12 +69,19 @@ class _TasksScreenState extends State<TasksScreen> {
                 controller: TextEditingController(),
                 leadingIcon: Icon(Icons.search,
                     color: context.invertedColor.withOpacity(.7), size: 25),
-                icon: svgImage(filter, size: 25, function: () {}),
+                icon: svgImage(filter,
+                    size: 25, function: () {}, color: context.iconColor),
                 marginH: 0,
                 height: 50,
               ),
               const Gap(20),
-              ...List.generate(15, (index) => taskModelCard()),
+              Row(
+                children: [
+                  tabItem(lable: txt('Public'), status: true),
+                  tabItem(lable: txt('Private'), status: false),
+                ],
+              ),
+              ...List.generate(showPublic ? 15 : 3, (index) => taskModelCard()),
               const Gap(20)
             ],
           ),
@@ -81,31 +89,75 @@ class _TasksScreenState extends State<TasksScreen> {
       ),
     );
   }
-}
 
-Widget taskModelCard() {
-  return Builder(
-      builder: (context) => Card(
-            color: context.bgcolor,
-            surfaceTintColor: pink,
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              // height: 80,
-              width: context.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: InkWell(
-                        onTap: () => context.showPopUpScreen(const EditTask()),
-                        child:
-                            const Icon(Icons.edit_note, color: pink, size: 20)),
-                  ),
-                  Txt('Title', bold: true),
-                  Txt(loremText(), color: context.iconColor, maxLines: 2)
-                ],
-              ),
+  Widget tabItem({required String lable, required bool status}) {
+    return Expanded(
+      child: InkWell(
+        onTap: () => setState(() => showPublic = status),
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                      color: showPublic == status
+                          ? context.primaryColor
+                          : Colors.grey,
+                      width: 2))),
+          height: 40,
+          child: Center(
+            child: Txt(
+              lable,
+              bold: showPublic == status,
+              // size: 20,
             ),
-          ));
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget taskModelCard() {
+    return Builder(
+        builder: (context) => Card(
+              color: context.bgcolor,
+              surfaceTintColor: pink,
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                width: context.w,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.check,
+                              color: Colors.green, size: 25),
+                          const Gap(10),
+                          InkWell(
+                              onTap: () =>
+                                  context.showPopUpScreen(const EditTask()),
+                              child: const Icon(Icons.edit_note,
+                                  color: pink, size: 20)),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.assignment_outlined,
+                            color: context.primaryColor, size: 25),
+                        const Gap(10),
+                        Txt('Task Title', bold: true),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 35),
+                      child: Txt('2 days', color: context.iconColor, size: 10),
+                    ),
+                    Txt(loremText(), color: context.iconColor, maxLines: 2)
+                  ],
+                ),
+              ),
+            ));
+  }
 }

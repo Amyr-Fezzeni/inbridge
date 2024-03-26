@@ -20,6 +20,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     Colors.blue,
     Colors.purple,
   ];
+  bool global = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,82 +36,112 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
             Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                    onPressed: () {},
-                    child: Txt("See Global Statistics",
+                    onPressed: () {
+                      setState(() {
+                        global = !global;
+                      });
+                    },
+                    child: Txt(global ? "My Stats" : "Global Statistics",
                         color: context.primaryColor))),
             const Gap(0),
-            Container(
-              padding: const EdgeInsets.all(15),
-              width: context.w,
-              decoration: BoxDecoration(
-                color: pink.withOpacity(.1),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Txt("Average Star Rating", color: pink, bold: true),
-                  const Gap(10),
-                  Txt("4.868", bold: true, size: 18),
-                  const Gap(10),
-                  Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(smallRadius)),
-                      child: Txt("Good", color: Colors.white)),
-                ],
-              ),
-            ),
-            const Gap(20),
-            Expanded(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: LineChart(
-                mainData(),
-              ),
-            )),
-            const Gap(20),
-            Container(
-              padding: const EdgeInsets.all(15),
-              width: context.w,
-              decoration: BoxDecoration(
-                color: pink.withOpacity(.1),
-              ),
-              child: Row(
-                children: [
-                  InkWell(
-                      child: Icon(Icons.arrow_back_ios_rounded,
-                          color: context.iconColor, size: 25)),
-                  Expanded(
+            global
+                ? const Expanded(
                     child: Column(
-                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Txt("Post frequency metric", color: pink, bold: true),
-                        const Gap(10),
-                        Txt("5.385", bold: true, size: 18),
-                        const Gap(10),
-                        Txt("+5.93%", color: Colors.green),
+                        Spacer(),
+                        Center(
+                          child: Text("Global statistics"),
+                        ),
+                        Spacer(),
+                      ],
+                    ),
+                  )
+                : Expanded(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          width: context.w,
+                          decoration: BoxDecoration(
+                            color: pink.withOpacity(.1),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Txt("Average Star Rating",
+                                  color: pink, bold: true),
+                              const Gap(10),
+                              Txt("4.868", bold: true, size: 18),
+                              const Gap(10),
+                              Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius:
+                                          BorderRadius.circular(smallRadius)),
+                                  child: Txt("Good", color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                        const Gap(20),
+                        Expanded(
+                            child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: LineChart(
+                            mainData(),
+                          ),
+                        )),
+                        const Gap(20),
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          width: context.w,
+                          decoration: BoxDecoration(
+                            color: pink.withOpacity(.1),
+                          ),
+                          child: Row(
+                            children: [
+                              InkWell(
+                                  child: Icon(Icons.arrow_back_ios_rounded,
+                                      color: context.iconColor, size: 25)),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Txt("Post frequency metric",
+                                        color: pink, bold: true),
+                                    const Gap(10),
+                                    Txt("5.385", bold: true, size: 18),
+                                    const Gap(10),
+                                    Txt("+5.93%", color: Colors.green),
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                  child: Icon(Icons.arrow_forward_ios_rounded,
+                                      color: context.iconColor, size: 25)),
+                            ],
+                          ),
+                        ),
+                        const Gap(20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            borderButton("Day", radius: smallRadius, border: 1),
+                            borderButton("Week",
+                                radius: smallRadius, border: 1),
+                            borderButton("Month",
+                                radius: smallRadius,
+                                textColor: pink,
+                                border: 2),
+                            borderButton("Year",
+                                radius: smallRadius, border: 1),
+                          ],
+                        ),
                       ],
                     ),
                   ),
-                  InkWell(
-                      child: Icon(Icons.arrow_forward_ios_rounded,
-                          color: context.iconColor, size: 25)),
-                ],
-              ),
-            ),
-            const Gap(20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                borderButton("Day", radius: smallRadius, border: 1),
-                borderButton("Week", radius: smallRadius, border: 1),
-                borderButton("Month",
-                    radius: smallRadius, textColor: pink, border: 2),
-                borderButton("Year", radius: smallRadius, border: 1),
-              ],
-            ),
             const Gap(90)
           ],
         ),

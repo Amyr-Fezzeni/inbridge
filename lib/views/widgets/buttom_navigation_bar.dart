@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:inbridge/constants/constants.dart';
 import 'package:inbridge/constants/style.dart';
 import 'package:inbridge/services/util/ext.dart';
+import 'package:inbridge/views/questions/questions_screen.dart';
 import 'package:inbridge/views/widgets/loader.dart';
 import 'package:provider/provider.dart';
 import 'package:inbridge/providers/menu_provider.dart';
@@ -74,6 +75,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               left: 0,
               child: Center(
                 child: InkWell(
+                  onTap:()=> context.moveTo(const QuestionsScreen()),
                   child: Container(
                     height: 50,
                     width: 50,

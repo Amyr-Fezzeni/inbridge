@@ -67,6 +67,7 @@ flutter:
     - assets/icons/
     - assets/icons/svg/
     - assets/images/
+    - assets/icons/social media/
 
 
 flutter_launcher_icons:
